@@ -64,7 +64,13 @@ console.assert(jerry.speak() == "Tengo una colección de monedas antiguas raras!
 */
 
 var clonRick = Object.create(protoRick);
-var clonRick = Object.create(protoRick);
+clonRick.id="D-137";
+
+var otroRick = Object.create(protoRick);
+otroRick.id="B-137";
+
+var clonMorty = Object.create(protoMorty);
+clonMorty.partner = clonRick;
 
 console.assert(clonRick);
 console.assert(protoRick != clonRick);
@@ -92,6 +98,9 @@ console.assert(clonMorty.partner == clonRick);
 * Crea el objeto universo
 */
 
+var universo = {};
+universo.length = 0;
+console.log(universo.length);
 console.assert(universo);
 console.assert(Object.getPrototypeOf(universo) != Array.prototype);
 console.assert(universo.length == 0);
@@ -101,6 +110,19 @@ console.assert(universo.length == 0);
 * mete en él a los 6 objetos que has creado (Rick, Morty y Jerry, 
 * 2 rick-clones y 1 clon de Morty) y añádelo al objeto `universo`.
 */
+
+var tierra = [];
+universo.Tierra= tierra;
+universo.Tierra.push(jerry);
+universo.Tierra.push(protoRick);
+universo.Tierra.push(protoMorty);
+universo.Tierra.push(clonRick);
+universo.Tierra.push(otroRick);
+universo.Tierra.push(clonMorty);
+
+universo.length=1;
+
+console.log(universo);
 
 console.assert(tierra);
 console.assert(Object.getPrototypeOf(tierra) == Array.prototype);
@@ -182,4 +204,5 @@ console.assert(doofous.id == "J-19-Z7");
 console.assert(doofous.ondas == "altas");
 console.assert(doufus.monedas.length == 4);
 console.assert(doufous.speak() == "Tengo una colección de monedas antiguas raras!");
+
 
