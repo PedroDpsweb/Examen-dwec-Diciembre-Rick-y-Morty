@@ -201,18 +201,19 @@ console.assert(gun.historial.length == 2);
 * antigua: Fart, Tierra.
 */
 
-gun.scan= function(){
-  gun.historial.reverse();
-  let longitud=gun.historial.length;
-  for(let i=0;i<longitud;i++){
-      console.log(gun.historial[i]);
-      
-  }
- 
-  gun.historial.reverse();
+gun.scan= function getHistorial(){
+   let scanHistorial= [];
+ gun.historial.reverse();
+ let longitud=gun.historial.length;
+ for(let i=0;i<longitud;i++){
+     scanHistorial.push(gun.historial[i]);
+     
+ }
+ gun.historial.reverse();
+ return scanHistorial;
 
-  
-  
+ 
+ 
 }
 //Si hago gun.scan() si que sale bien
 //gun.scan();
