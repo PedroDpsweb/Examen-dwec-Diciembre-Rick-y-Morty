@@ -1,3 +1,4 @@
+
     
 /** 
  * Importa los módulos de tus clases 
@@ -124,7 +125,7 @@ universo[dimension].push(clonMorty);
 
 universo.insertarEnDimension("Tierra");
 
-universo.length=1;
+universo.length ++;
 
 console.log(universo);
 
@@ -150,18 +151,18 @@ console.assert(gun.historial.length == 1);
 //funcion para crear dimensiones
 gun.crearPortal= function(dimension){
 universo[dimension] = [];
-universo.length += 1;
+universo.length ++;
 gun.historial.push(dimension);
 }
 
 //funcion para que Rick dispare
-protoRick.disparar= function(arma){
-   gun.crearPortal("Fart");
+protoRick.disparar= function(arma,destino){
+   arma.crearPortal(destino);
 
 }
 
 //Rick dispara
-protoRick.disparar();
+protoRick.disparar(gun,"Fart");
 console.log(gun.historial);
 
 console.assert("Fart" in universo);
@@ -205,17 +206,19 @@ console.assert(gun.historial.length == 2);
 */
 
 gun.scan= function(){
-   gun.historial.reverse();
-   let longitud=gun.historial.length;
-   console.log(longitud);
+   let scan = gun.historial;
+   scan.reverse();
+   let longitud=scan.length;
    for(let i=0;i<longitud;i++){
-       console.log(gun.historial[i]);
+       console.log(scan[i]);
    }
    
    
 }
-
-console.log(gun.scan());
+//Si hago gun.scan() si que sale bien
+gun.scan();
+//Dejo los 2 scans
+//console.log(gun.scan());
 console.assert(gun.historial.length == 2);
 
 
@@ -224,7 +227,14 @@ console.assert(gun.historial.length == 2);
 */
 
 
-//universo.cambiarDimension(3,"Fart","Coach");
+// var Coach=[];
+// universo.Coach = Coach;
+
+
+protoRick.disparar(gun,"Coach");
+
+
+console.log(universo);
 
 console.assert("Coach" in universo);
 console.assert(universo.length == 3);
@@ -240,7 +250,11 @@ console.assert(universo.length == 3);
 * Coaches, Fart, Tierra.
 */
 
-console.assert(universo["Coaches"].length == 5);
+
+universo.cambiarDimension(5,"Fart","Coach");
+
+
+console.assert(universo["Coach"].length == 5);
 console.assert(universo["Fart"].length == 0);
 console.assert(universo["Tierra"].length == 1);
 console.log(gun.scan());
@@ -272,7 +286,7 @@ doofous.speak = () => "Tengo una colección de monedas antiguas raras!";
 console.assert(doofous);
 console.assert(doofous.id == "J-19-Z7");
 console.assert(doofous.ondas == "altas");
-console.assert(doufus.monedas.length == 4);
-console.assert(doufous.speak() == "Tengo una colección de monedas antiguas raras!");
+console.assert(doofous.monedas.length == 4);
+console.assert(doofous.speak() == "Tengo una colección de monedas antiguas raras!");
 
 
