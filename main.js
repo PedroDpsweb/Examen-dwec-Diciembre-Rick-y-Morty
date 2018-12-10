@@ -1,4 +1,3 @@
-
     
 /** 
  * Importa los módulos de tus clases 
@@ -114,11 +113,16 @@ console.assert(universo.length == 0);
 var tierra = [];
 universo.Tierra= tierra;
 universo.Tierra.push(jerry);
-universo.Tierra.push(protoRick);
-universo.Tierra.push(protoMorty);
-universo.Tierra.push(clonRick);
-universo.Tierra.push(otroRick);
-universo.Tierra.push(clonMorty);
+
+universo.insertarEnDimension= function(dimension){
+universo[dimension].push(protoRick);
+universo[dimension].push(protoMorty);
+universo[dimension].push(clonRick);
+universo[dimension].push(otroRick);
+universo[dimension].push(clonMorty);
+}
+
+universo.insertarEnDimension("Tierra");
 
 universo.length=1;
 
@@ -139,8 +143,26 @@ console.assert(universo.length == 1);
 * Rick dispara la pistola y se añade al universo la dimensión "Fart"
 *  */
 
+var gun = {historial:["Tierra"]};
 console.assert(gun);
 console.assert(gun.historial.length == 1);
+
+//funcion para crear dimensiones
+gun.crearPortal= function(dimension){
+universo[dimension] = [];
+universo.length += 1;
+gun.historial.push(dimension);
+}
+
+//funcion para que Rick dispare
+protoRick.disparar= function(arma){
+   gun.crearPortal("Fart");
+
+}
+
+//Rick dispara
+protoRick.disparar();
+console.log(gun.historial);
 
 console.assert("Fart" in universo);
 console.assert(universo.length == 2);
@@ -155,6 +177,23 @@ console.assert(universo.length == 2);
 * La pistola añade a su historial "Fart".
 */
 
+console.log(protoRick);
+
+//Los protagnistas cambian de dimension y se van a Fart
+universo.cambiarDimension = function (cantidad,origen,destino){
+   for(let i=0;i<cantidad;i++){
+       universo[origen].pop();
+   }
+   universo.insertarEnDimension(destino);
+}
+
+universo.cambiarDimension(5,"Tierra","Fart");
+
+
+console.log(universo.Tierra);
+console.log(universo.Fart);
+
+
 console.assert(universo["Fart"].length == 5);
 console.assert(universo["Tierra"].length == 1);
 console.assert(gun.historial.length == 2);
@@ -165,6 +204,17 @@ console.assert(gun.historial.length == 2);
 * antigua: Fart, Tierra.
 */
 
+gun.scan= function(){
+   gun.historial.reverse();
+   let longitud=gun.historial.length;
+   console.log(longitud);
+   for(let i=0;i<longitud;i++){
+       console.log(gun.historial[i]);
+   }
+   
+   
+}
+
 console.log(gun.scan());
 console.assert(gun.historial.length == 2);
 
@@ -172,6 +222,9 @@ console.assert(gun.historial.length == 2);
 /**
 * Rick dispara la pistola y se añade al universo la dimensión "Coaches".
 */
+
+
+//universo.cambiarDimension(3,"Fart","Coach");
 
 console.assert("Coach" in universo);
 console.assert(universo.length == 3);
@@ -198,6 +251,23 @@ console.assert(gun.historial.length == 3);
 /**
 * Crea un Doofus Rick segun se indica en el README
 */
+
+// var extend = function extender(protoRick, jerry) {
+//     var names = Object.getOwnPropertyNames(jerry);
+//                 for(var i = 0; i < names.length; i++) {
+//                     if (names[i] in protoRick) continue;
+//                     var desc = Object.getOwnPropertyDescriptor(jerry,names[i]);
+//                     Object.defineProperty(protoRick, names[i], desc);
+//                 }
+//     return protoRick;
+// };
+
+var doofous = Object.create(protoRick);
+doofous.id = "J-19-Z7";
+doofous.ondas = "altas";
+doofous.monedas= ["moneda1","moneda2","moneda3","moneda4"];
+doofous.speak = () => "Tengo una colección de monedas antiguas raras!";
+
 
 console.assert(doofous);
 console.assert(doofous.id == "J-19-Z7");
