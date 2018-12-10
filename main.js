@@ -100,7 +100,6 @@ console.assert(clonMorty.partner == clonRick);
 
 var universo = {};
 universo.length = 0;
-console.log(universo.length);
 console.assert(universo);
 console.assert(Object.getPrototypeOf(universo) != Array.prototype);
 console.assert(universo.length == 0);
@@ -127,7 +126,6 @@ universo.insertarEnDimension("Tierra");
 
 universo.length ++;
 
-console.log(universo);
 
 console.assert(tierra);
 console.assert(Object.getPrototypeOf(tierra) == Array.prototype);
@@ -163,7 +161,6 @@ protoRick.disparar= function(arma,destino){
 
 //Rick dispara
 protoRick.disparar(gun,"Fart");
-console.log(gun.historial);
 
 console.assert("Fart" in universo);
 console.assert(universo.length == 2);
@@ -178,7 +175,7 @@ console.assert(universo.length == 2);
 * La pistola añade a su historial "Fart".
 */
 
-console.log(protoRick);
+
 
 //Los protagnistas cambian de dimension y se van a Fart
 universo.cambiarDimension = function (cantidad,origen,destino){
@@ -191,8 +188,7 @@ universo.cambiarDimension = function (cantidad,origen,destino){
 universo.cambiarDimension(5,"Tierra","Fart");
 
 
-console.log(universo.Tierra);
-console.log(universo.Fart);
+
 
 
 console.assert(universo["Fart"].length == 5);
@@ -206,35 +202,32 @@ console.assert(gun.historial.length == 2);
 */
 
 gun.scan= function(){
-   let scan = gun.historial;
-   scan.reverse();
-   let longitud=scan.length;
-   for(let i=0;i<longitud;i++){
-       console.log(scan[i]);
-   }
-   
-   
+  gun.historial.reverse();
+  let longitud=gun.historial.length;
+  for(let i=0;i<longitud;i++){
+      console.log(gun.historial[i]);
+      
+  }
+ 
+  gun.historial.reverse();
+
+  
+  
 }
 //Si hago gun.scan() si que sale bien
-gun.scan();
+//gun.scan();
 //Dejo los 2 scans
-//console.log(gun.scan());
+console.log(gun.scan());
 console.assert(gun.historial.length == 2);
+
 
 
 /**
 * Rick dispara la pistola y se añade al universo la dimensión "Coaches".
 */
 
-
-// var Coach=[];
-// universo.Coach = Coach;
-
-
+//Rick dispara el arma y crea Coach
 protoRick.disparar(gun,"Coach");
-
-
-console.log(universo);
 
 console.assert("Coach" in universo);
 console.assert(universo.length == 3);
